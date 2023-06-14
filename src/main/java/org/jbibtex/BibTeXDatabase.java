@@ -39,6 +39,10 @@ public class BibTeXDatabase implements Serializable {
 			BibTeXEntry entry = (BibTeXEntry)object;
 
 			success = this.entries.putIfMissing(entry.getKey(), entry);
+			
+			if (!success) {
+				throw new RuntimeException("Duplicate bibtex key : " + entry.getKey());
+			}
 		} else
 
 		{
